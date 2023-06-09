@@ -1,0 +1,36 @@
+<aura:component controller="accountServerController"
+                		   implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <aura:attribute name="singleAcc" type="Account" default="
+                                                             {
+                                                             'sobjectType':'Account',
+                                                             'Name':'',
+                                                             'Phone':'',
+                                                             'Website':''
+                                                             }
+                                                       		 "/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}"/>
+    
+    <aura:attribute name="multiacc" type="Account[]"/>
+    
+    <aura:attribute name="accid" type="string"/>
+    <aura:attribute name="msg" type="string"/>
+    
+    <lightning:input name="accountName" label="Enter Account Name" value="{!v.singleAcc.Name}"/>
+    <lightning:input name="accountPhone" label="Enter Account Phone" value="{!v.singleAcc.Phone}"/>
+    <lightning:input name="accountWebsite" label="Enter Account Website" value="{!v.singleAcc.Website}"/>
+    <br/><br/>
+    
+    <lightning:button variant="brand" label="Create Account" title="Brand action" onclick="{! c.accountcreateClientController }" />
+   <br/>
+    Created Account ID:{!v.accid} 
+    <br/>
+    Message:{!v.msg}
+    <br/>
+    
+    {!v.multiacc}
+    <aura:iteration var="single" items="{!v.multiacc}">
+    {!single.Name}  - {!single.Website}  - {!single.Id} <br/> 
+    </aura:iteration>
+</aura:component>
